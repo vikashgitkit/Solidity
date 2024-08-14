@@ -11,14 +11,21 @@ contract EthGame {
     uint256 public targetAmount = 14 ether;
     address public winner;
 
+ //need to create a balance state variable to prevent forcefully sending ether
     uint256 public balance;
 
     function deposit() public payable {
         require(msg.value == 1 ether, "You can only send 1 ether");
 
+ //if the current balance is greater then the targetAmount then the game is over
+        //to prevent forcefully sending eth the balance needs to be updated manually instead of just checking the balance amount
+        //to prevent forcefully sending ether update the balance state variable manually
+       
         balance += msg.value;
         require(balance <= targetAmount, "Game is over");
 
+//if the balance is == to the targetAmount when the 14th person sends ether then we set the winner to the message sender
+       
         if(balance == targetAmount) {
             winner = msg.sender;
         }
@@ -27,6 +34,7 @@ contract EthGame {
     function claimReward() public {
         require(msg.sender == winner, "Not a winner");
 
+   //this will send all the ether in this contract to the winner
         (bool sent, ) = msg.sender.call{value: address(this).balance}("");
         require(sent, "Failed to send ether");
 
