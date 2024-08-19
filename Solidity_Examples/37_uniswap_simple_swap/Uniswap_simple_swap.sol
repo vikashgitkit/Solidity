@@ -18,4 +18,25 @@ contract SimpleSwap{
         swapRouter = _swapRouter;
     }
 
+      function swapWETHForDAI(uint256 amountIn) external returns (uint256 amountOut) {
+        // Transfer the specified amount of WETH9 to this contract.
+        TransferHelper.safeTransferFrom(WETH9, msg.sender, address(this), amountIn);
+        // Approve the router to spend WETH9.
+        TransferHelper.safeApprove(WETH9, address(swapRouter), amountIn);
+        // Create the params that will be used to execute the swap
+        ISwapRouter.ExactInputSingleParams memory params = ISwapRouter.ExactInputSingleParams({
+            tokenIn: WETH9,
+            tokenOut: DAI,
+            fee: feeTier,
+            recipient: msg.sender,
+            deadline: block.timestamp,
+            amountIn: amountIn,
+            amountOutMinimum: 0,
+            sqrtPriceLimitX96: 0
+        });
+        // The call to `exactInputSingle` executes the swap.
+        amountOut = swapRouter.exactInputSingle(params);
+        return amountOut;
+    }
+
 }
