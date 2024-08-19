@@ -35,4 +35,17 @@ contract Vault is ERC20{
         token.transferFrom(msg.sender, address(this), amountToken);
      }
 
+      function withdraw(uint256 amount) external {
+        require(amount > 0);
+
+        uint256 amountLPToken = amount;
+        uint256 supplyLPToken = this.totalSupply();
+        uint256 balanceToken = token.balanceOf(address(this));
+
+        uint256 amountToken = (amountLPToken * balanceToken) / supplyLPToken;
+
+        _burn(msg.sender, amountLPToken);
+        token.transfer(msg.sender, amountToken);
+     }
+
 }
