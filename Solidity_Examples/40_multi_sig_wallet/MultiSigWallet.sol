@@ -116,6 +116,28 @@ modifier onlyOwner() {
         emit ConfirmTransaction(msg.sender, _txIndex);
     }
 
-    
+    function executeTransaction(uint256 _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+
+        require(transaction.numConfirmations >= numConfirmationRequired, "cannot execute tx");
+
+        transaction.executed = true;
+
+        (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
+        require(success, "tx failed");
+
+        emit ExecuteTransaction(msg.sender, _txIndex);
+    }
+
+    function revokeConfirmation(uint256 _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
+
+        transaction.numConfirmations -= 1;
+        isConfirmed[_txIndex][msg.sender] = false;
+
+        emit RevokeConfirmation(msg.sender, _txIndex);
+    }
+
 
 }
