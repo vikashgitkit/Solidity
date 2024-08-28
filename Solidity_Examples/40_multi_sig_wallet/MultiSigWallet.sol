@@ -86,6 +86,36 @@ modifier onlyOwner() {
         numConfirmationRequired = _numConfirmationsRequired;
     }
 
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value, address(this).balance);
+    }
+
+    function submitTransaction(
+        address _to,
+        uint256 _value,
+        bytes memory _data
+    ) public onlyOwner {
+        uint256 txIndex = transactions.length;
+
+        transactions.push(Transaction({to: _to, value: _value, data: _data, executed: false, numConfirmations: 0}));
+
+        emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data);
+    }
+
+    function confirmTransaction(uint256 _txIndex)
+        public
+        onlyOwner
+        txExists(_txIndex)
+        notExecuted(_txIndex)
+        notConfirmed(_txIndex)
+    {
+        Transaction storage transaction = transactions[_txIndex];
+        transaction.numConfirmations += 1;
+        isConfirmed[_txIndex][msg.sender] = true;
+
+        emit ConfirmTransaction(msg.sender, _txIndex);
+    }
+
     
 
 }
