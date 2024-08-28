@@ -45,4 +45,25 @@ contract MultiSigWallet{
     Transaction[] public transactions;
 
 
+modifier onlyOwner() {
+        require(isOwner[msg.sender], "not owner");
+        _;
+    }
+
+    modifier txExists(uint256 _txIndex) {
+        require(_txIndex < transactions.length, "tx does not exist");
+        _;
+    }
+
+    modifier notExecuted(uint256 _txIndex) {
+        require(!transactions[_txIndex].executed, "tx already executed");
+        _;
+    }
+
+    modifier notConfirmed(uint256 _txIndex) {
+        require(!isConfirmed[_txIndex][msg.sender], "tx already confirmed");
+        _;
+    }
+
+
 }
