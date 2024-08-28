@@ -27,5 +27,22 @@ contract MultiSigWallet{
     event RevokeConfirmation(address indexed owner, uint256 indexed txIndex);
     event ExecuteTransaction(address indexed owner, uint256 indexed txIndex);
 
+     address[] public owners;
+    mapping(address => bool) public isOwner;
+    uint256 public numConfirmationRequired;
+
+    struct Transaction {
+        address to;
+        uint256 value;
+        bytes data;
+        bool executed;
+        uint256 numConfirmations;
+    }
+
+    // mapping from tx index => owner => bool
+    mapping(uint256 => mapping(address => bool)) public isConfirmed;
+
+    Transaction[] public transactions;
+
 
 }
