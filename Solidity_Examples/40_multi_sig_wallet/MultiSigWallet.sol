@@ -139,5 +139,34 @@ modifier onlyOwner() {
         emit RevokeConfirmation(msg.sender, _txIndex);
     }
 
+    function getfOwners() public view returns (address[] memory) {
+        return owners;
+    }
+
+    function getTransactionCount() public view returns (uint256) {
+        return transactions.length;
+    }
+
+    function getTransaction(uint256 _txIndex)
+        public
+        view
+        returns (
+            address to,
+            uint256 value,
+            bytes memory data,
+            bool executed,
+            uint256 numConfirmations
+        )
+    {
+        Transaction storage transaction = transactions[_txIndex];
+        return (
+            transaction.to,
+            transaction.value,
+            transaction.data,
+            transaction.executed,
+            transaction.numConfirmations
+        );
+    }
+
 
 }
