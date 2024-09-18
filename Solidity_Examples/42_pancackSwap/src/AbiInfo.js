@@ -1,0 +1,1 @@
+const erc20ABI=["function decimals() public view returns(uint8)"]
