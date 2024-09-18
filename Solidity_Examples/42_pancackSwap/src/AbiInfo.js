@@ -6,5 +6,10 @@ const factoryABI=["function getPair(address tokenA, address tokenB) external vie
 
 const paiABI=[
     "function token0() external view returns (address)",
-    "function token1() external view returns (address)"
+    "function token1() external view returns (address)",
+    "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)"
+]
+
+const routerABI=[
+    "function getAmountsOut(address factory, uint amountIn, address[] memory path) internal view returns (uint[] memory amounts)"
 ]
