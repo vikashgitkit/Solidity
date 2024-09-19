@@ -24,7 +24,7 @@ const{factoryAddress,
         routerAddress, routerABI, provider
     )
 
-    const priceFetch=async(amount)=>{
+    const priceFetch=async(humanFormat)=>{
         const token1 = new ethers.Contract(
             fromAddress, erc20ABI, provider
         )
@@ -34,7 +34,8 @@ const{factoryAddress,
         )
 
         const decimal1 = await token1.decimals()
-        console.log("Decimal is:", decimal1)
+        //console.log("Decimal is:", decimal1)
+        const amountIn = ethers.utils.parseUnits(humanFormat, decimal1).toString();
     }
 
     priceFetch()
