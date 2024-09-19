@@ -36,7 +36,13 @@ const{factoryAddress,
         const decimal1 = await token1.decimals()
         //console.log("Decimal is:", decimal1)
         const amountIn = ethers.utils.parseUnits(humanFormat, decimal1).toString();
+
+        const amountOut = await routerInstance.getAmountsOut(amountIn,{
+            fromAddress,
+            toAddress
+        })
     }
 
-    priceFetch()
+    humanFormat="100"
+    priceFetch(humanFormat)
 
