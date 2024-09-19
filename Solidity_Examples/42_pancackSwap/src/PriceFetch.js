@@ -18,7 +18,7 @@ const{factoryAddress,
     const factoryInstance = new ethers.Contract(
         factoryAddress, factoryABI, provider
     )
-    console.log("factory instance is:", factoryInstance);
+    //console.log("factory instance is:", factoryInstance);
 
     const routerInstance = new ethers.Contract(
         routerAddress, routerABI, provider
@@ -34,13 +34,20 @@ const{factoryAddress,
         )
 
         const decimal1 = await token1.decimals()
+        const decimal2 = await token2.decimals()
         //console.log("Decimal is:", decimal1)
         const amountIn = ethers.utils.parseUnits(humanFormat, decimal1).toString();
 
-        const amountOut = await routerInstance.getAmountsOut(amountIn,{
+        const amountsOut = await routerInstance.getAmountsOut(amountIn,{
             fromAddress,
             toAddress
         })
+
+        const humanOutput = ethers.utils.formatUnits(
+            amountsOut[1].toString(),
+            decimal2
+        )
+        console.log("HumanOutPut:", humanOutput)
     }
 
     humanFormat="100"
