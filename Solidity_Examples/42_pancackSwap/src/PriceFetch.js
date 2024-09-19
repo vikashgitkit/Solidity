@@ -23,3 +23,9 @@ const{factoryAddress,
     const routerInstance = new ethers.Contract(
         routerAddress, routerABI, provider
     )
+
+    const priceFetch=async(amount)=>{
+        const token1 = new ethers.Contract(
+            fromAddress, erc20ABI, provider
+        )
+    }
