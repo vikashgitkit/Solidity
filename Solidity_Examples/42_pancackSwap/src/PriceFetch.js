@@ -28,4 +28,8 @@ const{factoryAddress,
         const token1 = new ethers.Contract(
             fromAddress, erc20ABI, provider
         )
+
+        const token2 = new ethers.Contract(
+            toAddress, erc20ABI, provider
+        )
     }
