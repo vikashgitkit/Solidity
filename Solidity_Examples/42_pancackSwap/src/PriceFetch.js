@@ -32,4 +32,10 @@ const{factoryAddress,
         const token2 = new ethers.Contract(
             toAddress, erc20ABI, provider
         )
+
+        const decimal1 = await token1.decimals()
+        console.log("Decimal is:", decimal1)
     }
+
+    priceFetch()
+
