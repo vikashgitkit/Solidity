@@ -11,7 +11,7 @@ const paiABI=[
 ]
 
 const routerABI=[
-    "function getAmountsOut(address factory, uint amountIn, address[] memory path) internal view returns (uint[] memory amounts)"
+    "function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)"
 ]
 
 module.exports={
