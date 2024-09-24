@@ -29,4 +29,17 @@ using SafeERC20 for IERC20;
     uint256 private constant MAX_INT =
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
+
+    function initiateArbitrage(address _busdBorrow, uint amount) {
+        IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
+        IERC20(CROX).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
+        IERC20(CAKE).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
+
+        address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(_busdBorrow, WBNB);
+
+        require(pair != address(0), "Pool does not exist");
+
+        address token0 = IUniswapV2Pair(pair).token0();
+        address token1 = IUniswapV2Pair(pair).token1();
+    }
 }
