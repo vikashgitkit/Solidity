@@ -30,7 +30,7 @@ using SafeERC20 for IERC20;
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
 
-    function initiateArbitrage(address _busdBorrow, uint amount) {
+    function initiateArbitrage(address _busdBorrow, uint _amount) {
         IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
         IERC20(CROX).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
         IERC20(CAKE).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
@@ -39,7 +39,12 @@ using SafeERC20 for IERC20;
 
         require(pair != address(0), "Pool does not exist");
 
-        address token0 = IUniswapV2Pair(pair).token0();
-        address token1 = IUniswapV2Pair(pair).token1();
+        address token0 = IUniswapV2Pair(pair).token0(); //WBNB
+        address token1 = IUniswapV2Pair(pair).token1(); //BUSD
+
+        uint amount0Out = _busdBorrow==token0?_amount:0;
+        uint amount1Out = _busdBorrow==token1?_amount:0;
+
+        IUniswapV2Pair(pair).swap(amount0Out, amount1Out, address(this), data); //Transferring Busd tokens to in this contract so now we can use this in triangular arbitrage
     }
 }
