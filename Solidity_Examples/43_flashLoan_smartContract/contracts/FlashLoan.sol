@@ -74,5 +74,8 @@ using SafeERC20 for IERC20;
         uint trade1Coin = placeTrade(BUSD,CROX,loanAmount);
         uint trade2Coin = placeTrade(CROX,CAKE,trade1Coin);
         uint trade3Coin = placeTrade(CAKE,BUSD,trade2Coin);
+
+        bool result = checkResult(repayAmount, trade3Coin);
+        require(result, "Arbitrage failed");
     }
 }
