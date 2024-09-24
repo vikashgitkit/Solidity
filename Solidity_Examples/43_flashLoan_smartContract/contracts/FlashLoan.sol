@@ -57,6 +57,22 @@ using SafeERC20 for IERC20;
         address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(token0, token1);
 
         require(msg.sender==pair, "Pair does not match");
-        require(_sender==address(this));
+        require(_sender==address(this), "_sender does not match");
+
+        (address busdBorrow, uint amount, address account) = abi.decode(
+            _data,(address, uint, address)
+        );
+
+        //Fee calculation
+        uint fee = ((amount*3)/997)+1;
+
+        uint repayAmount = amount + fee;
+
+        uint loanAmount = _amount0>0?_amount0:_amount1;
+
+        //Triangular Arbitrage
+        uint trade1Coin = placeTrade(BUSD,CROX,loanAmount);
+        uint trade2Coin = placeTrade(CROX,CAKE,trade1Coin);
+        uint trade3Coin = placeTrade(CAKE,BUSD,trade2Coin);
     }
 }
