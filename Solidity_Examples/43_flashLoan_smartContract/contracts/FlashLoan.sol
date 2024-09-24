@@ -35,6 +35,7 @@ using SafeERC20 for IERC20;
         IERC20(CROX).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
         IERC20(CAKE).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
 
+ //liquidity pool of BUSD and WBNB
         address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(_busdBorrow, WBNB);
 
         require(pair != address(0), "Pool does not exist");
@@ -45,6 +46,13 @@ using SafeERC20 for IERC20;
         uint amount0Out = _busdBorrow==token0?_amount:0;
         uint amount1Out = _busdBorrow==token1?_amount:0;
 
+        bytes memory data = abi.encode(_busdBorrow, _amount, msg.sender);
         IUniswapV2Pair(pair).swap(amount0Out, amount1Out, address(this), data); //Transferring Busd tokens to in this contract so now we can use this in triangular arbitrage
+    }
+
+    function pancakeCall(address _sender, uint _amount0, uint _amount1, bytes calldata _data) external {
+        address token0 = IUniswapV2Pair(msg.sender).token0();
+        address token1 = IUniswapV2Pair(msg.sender).token1();
+        
     }
 }
