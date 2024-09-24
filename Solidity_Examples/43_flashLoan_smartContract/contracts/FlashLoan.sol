@@ -59,7 +59,7 @@ using SafeERC20 for IERC20;
         require(msg.sender==pair, "Pair does not match");
         require(_sender==address(this), "_sender does not match");
 
-        (address busdBorrow, uint amount, address account) = abi.decode(
+        (address busdBorrow, uint amount, address myAccount) = abi.decode(
             _data,(address, uint, address)
         );
 
@@ -77,5 +77,8 @@ using SafeERC20 for IERC20;
 
         bool result = checkResult(repayAmount, trade3Coin);
         require(result, "Arbitrage failed");
+
+        IERC20(BUSD).transfer(myAccount, trade3Coin-repayAmount); //Transfer the amount in my account
+        IERC20(busdBorrow).transfer(pair, repayAmount); //Transfer the amount to liquidity pool from where we took the tokens
     }
 }
