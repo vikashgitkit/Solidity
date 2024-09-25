@@ -35,7 +35,7 @@ function checkResult(uint _repayAmount, uint _acquiredCoin) private returns(bool
     return _acquiredCoin>_repayAmount;
 }
 
-function placeTrade(address _fromToken, address _toToken, uint amount) private returns(uint) {
+function placeTrade(address _fromToken, address _toToken, uint _amountIn) private returns(uint) {
     address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(_fromToken, _toToken);
     require(pair!=address(0), "Pool does not exist");
 
@@ -43,7 +43,9 @@ function placeTrade(address _fromToken, address _toToken, uint amount) private r
     path[0] = _fromToken;
     path[1] = _toToken;
 
-    uint amountRequired = IUniswapV2Router01(PANCAKE_FACTORY).getAmountOut(amountIn, reserveIn, reserveOut);
+    uint amountRequired = IUniswapV2Router01(PANCAKE_FACTORY).getAmountOut(_amountIn, path)[0];
+
+    uint amountReceived = IUniswapV2Router01(PANCAKE_ROUTER).swapExactTokensForTokens(_amountIn, amountRequired, path, address(this), deadline)[1];
 }
 
     function initiateArbitrage(address _busdBorrow, uint _amount) {
