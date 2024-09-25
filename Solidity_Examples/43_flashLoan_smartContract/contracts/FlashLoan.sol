@@ -46,6 +46,9 @@ function placeTrade(address _fromToken, address _toToken, uint _amountIn) privat
     uint amountRequired = IUniswapV2Router01(PANCAKE_FACTORY).getAmountOut(_amountIn, path)[0];
 
     uint amountReceived = IUniswapV2Router01(PANCAKE_ROUTER).swapExactTokensForTokens(_amountIn, amountRequired, path, address(this), deadline)[1];
+
+    require(amountReceived>0, "Transaction Abort");
+    return amountReceived;
 }
 
     function initiateArbitrage(address _busdBorrow, uint _amount) {
