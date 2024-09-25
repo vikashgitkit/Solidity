@@ -35,6 +35,10 @@ function checkResult(uint _repayAmount, uint _acquiredCoin) private returns(bool
     return _acquiredCoin>_repayAmount;
 }
 
+function placeTrade(address _fromToken, address _toToken, uint amount) private returns(uint) {
+    
+}
+
     function initiateArbitrage(address _busdBorrow, uint _amount) {
         IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
         IERC20(CROX).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
