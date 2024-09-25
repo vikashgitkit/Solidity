@@ -30,6 +30,11 @@ using SafeERC20 for IERC20;
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
 
+
+function checkResult(uint _repayAmount, uint _acquiredCoin) private returns(bool) {
+    return _acquiredCoin>_repayAmount;
+}
+
     function initiateArbitrage(address _busdBorrow, uint _amount) {
         IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
         IERC20(CROX).safeApprove(address(PANCAKE_ROUTER), MAX_INT);
