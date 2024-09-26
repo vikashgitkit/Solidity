@@ -86,7 +86,11 @@ describe("FlashLoan Contract", () => {
       );
       console.log("Balance of CROX: " + formattedBalCROX);
 
-     
+      const contractBalanceCAKE = await FLASHLOAN.getBalanceOfToken(CAKE);
+      const formattedBalCAKE = Number(
+        ethers.utils.formatUnits(contractBalanceCAKE, DECIMALS)
+      );
+      
     });
   });
 });
