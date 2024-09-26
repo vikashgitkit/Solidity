@@ -90,7 +90,7 @@ describe("FlashLoan Contract", () => {
       const formattedBalCAKE = Number(
         ethers.utils.formatUnits(contractBalanceCAKE, DECIMALS)
       );
-      
+      console.log("Balance of CAKE: " + formattedBalCAKE);
     });
   });
 });
