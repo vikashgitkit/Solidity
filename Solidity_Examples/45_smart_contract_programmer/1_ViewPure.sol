@@ -13,4 +13,12 @@ contract ViewPure {
     function pureFunc() external pure returns (uint) {
         return 1;
     }
+
+    function addToNum(uint x) external view returns (uint) {
+        return x + num;
+    }
+
+    function add(uint x, uint y) external pure returns (uint) {
+        return x + y;
+    }
 }
