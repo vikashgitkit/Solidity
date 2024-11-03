@@ -45,4 +45,35 @@ contract ERC20Contract {
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool) {
+        require(_allowance[msg.sender][_from] >= _value, "Not allowd enough");
+        require(
+            (_balances[_from] >= _value) && (_balances[_from] > 0),
+            "Not have enough balance"
+        );
+        _balances[_from] -= _value;
+        _balances[_to] += _value;
+        _allowance[msg.sender][_from] -= _value;
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+
+    function approve(address _spender, uint256 _value) public returns (bool) {
+        require(_balances[msg.sender] >= _value, "Not have enought balance");
+        _allowance[_spender][msg.sender] = _value;
+        emit Approve(msg.sender, _spender, _value);
+        return true;
+    }
+
+    function allowances(
+        address _owner,
+        address _spender
+    ) public view returns (uint256) {
+        return _allowance[_spender][_owner];
+    }
 }
