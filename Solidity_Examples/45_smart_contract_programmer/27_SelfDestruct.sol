@@ -24,6 +24,7 @@ contract Helperaddress {
         return address(this).balance;
     }
 
+    //Since the now we are kill the Kill contract using this Helper contract so the ether will send to this Helper contract because it's the msg.sender
     function kill(Kill _kill) external {
         _kill.killContract();
     }
