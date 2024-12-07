@@ -17,6 +17,7 @@ contract HashFunc {
         return abi.encode(text0, text1);
     }
 
+    //The diff b/w encode and encodePacked is that encodePacked compress the output
     function encodePacked(
         string memory text0,
         string memory text1
