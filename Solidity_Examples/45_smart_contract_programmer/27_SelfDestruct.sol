@@ -17,3 +17,14 @@ contract Kill {
         return 123;
     }
 }
+
+//Force send ether to any address
+contract Helperaddress {
+    function getBal() external view returns (uint) {
+        return address(this).balance;
+    }
+
+    function kill(Kill _kill) external {
+        _kill.killContract();
+    }
+}
