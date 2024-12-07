@@ -32,3 +32,6 @@ contract DelegateCall {
         require(success, "DelegateCall failed");
     }
 }
+// delegatecall is essential for proxy contracts, modular design, and dynamic plugins.
+// It allows for upgradability and efficient storage manipulation.
+// It maintains the storage, msg.sender, and msg.value of the caller, unlike call.
