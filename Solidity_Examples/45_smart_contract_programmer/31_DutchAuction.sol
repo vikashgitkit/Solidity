@@ -37,4 +37,10 @@ contract DutchAuction {
         nft = IERC721(_nft);
         nftId = _nftId;
     }
+
+    function getPrice() public view returns (uint) {
+        uint timeElapsed = block.timestamp - startAt;
+        uint discount = discountRate * timeElapsed;
+        return startingPrice - discount;
+    }
 }
