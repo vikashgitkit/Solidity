@@ -10,4 +10,10 @@ contract DutchAuction {
 
     IERC721 public immutable nft;
     uint public immutable nftId;
+
+    address public immutable seller;
+    uint public immutable startingPrice;
+    uint public immutable startAt;
+    uint public immutable expiresAt;
+    uint public immutable discountRate;
 }
