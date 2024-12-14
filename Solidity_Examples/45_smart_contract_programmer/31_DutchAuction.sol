@@ -4,3 +4,10 @@ pragma solidity ^0.8.20;
 interface IERC721 {
     function transferFrom(address _from, address _to, uint _nftId) external;
 }
+
+contract DutchAuction {
+    uint private constant DURATION = 7 days;
+
+    IERC721 public immutable nft;
+    uint public immutable nftId;
+}
