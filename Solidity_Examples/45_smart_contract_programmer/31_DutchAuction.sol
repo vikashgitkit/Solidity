@@ -55,5 +55,6 @@ contract DutchAuction {
         if (refund > 0) {
             payable(msg.sender).transfer(refund);
         }
+        selfdestruct(seller);
     }
 }
