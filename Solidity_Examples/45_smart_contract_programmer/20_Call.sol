@@ -26,8 +26,7 @@ contract Call {
 
     function callFoo(address _testCall) external payable {
         (bool success, bytes memory _data) = _testCall.call{
-            value: 111,
-            gas: 5000
+            value: 111
         }(abi.encodeWithSignature("foo(string,uint256)", "Call foo", 123));
         require(success, "call failed");
         data = _data;
