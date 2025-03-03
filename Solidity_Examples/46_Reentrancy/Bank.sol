@@ -20,6 +20,8 @@ contract Bank {
 
         (bool success, ) = msg.sender.call{value: bal}("");
         require(success, "Failed to withdraw");
+
+          balances[msg.sender] = 0;//This cause reentrancy attack
         
      
     }
