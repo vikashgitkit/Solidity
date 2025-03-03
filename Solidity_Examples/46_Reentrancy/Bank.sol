@@ -11,12 +11,12 @@ contract Bank {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw() external {
+    function withdraw() external { //(a)use nonReentrant gaurd here
         uint256 bal = balances[msg.sender];
 
         require(bal > 0, "Balance 0");
 
-           balances[msg.sender] = 0;
+           balances[msg.sender] = 0; //(b)update state just before transfer
 
         (bool success, ) = msg.sender.call{value: bal}("");
         require(success, "Failed to withdraw");
