@@ -14,7 +14,7 @@ contract TestDelegateCall {
 }
 
 //So using delegateCall as we are calling the setVars fn of
-//testDelegateCall contract but the value will be change in the DelegateCall contract not in TestDelegateCall contract
+//testDelegateCall contract but the value(state variables) will be change in the DelegateCall contract not in TestDelegateCall contract
 contract DelegateCall {
     uint public num;
     address public sender;
