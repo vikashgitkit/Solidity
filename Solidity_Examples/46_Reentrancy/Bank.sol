@@ -11,5 +11,16 @@ contract Bank {
         balances[msg.sender] += msg.value;
     }
 
-   
+    function withdraw() external {
+        uint256 bal = balances[msg.sender];
+
+        require(bal > 0, "Balance 0");
+
+           balances[msg.sender] = 0;
+
+        (bool success, ) = msg.sender.call{value: bal}("");
+        require(success, "Failed to withdraw");
+        
+     
+    }
 }
