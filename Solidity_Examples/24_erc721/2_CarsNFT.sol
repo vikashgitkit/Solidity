@@ -21,5 +21,14 @@ contract CarsNft is ERC721, ERC721Enumerable, ERC721URIStorage {
         _setTokenURI(tokenId, uri);
     }
 
-  
+    // The following functions are overrides required by Solidity.
+    function _update(address to, uint256 tokenId, address auth)
+        internal
+        override(ERC721, ERC721Enumerable)
+        returns (address)
+    {
+        return super._update(to, tokenId, auth);
+    }
+
+   
 }
