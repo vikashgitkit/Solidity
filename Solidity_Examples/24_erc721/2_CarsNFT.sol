@@ -30,5 +30,12 @@ contract CarsNft is ERC721, ERC721Enumerable, ERC721URIStorage {
         return super._update(to, tokenId, auth);
     }
 
-   
+    function _increaseBalance(address account, uint128 value)
+        internal
+        override(ERC721, ERC721Enumerable)
+    {
+        super._increaseBalance(account, value);
+    }
+
+    
 }
