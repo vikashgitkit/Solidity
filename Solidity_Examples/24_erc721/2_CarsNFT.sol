@@ -52,6 +52,6 @@ contract CarsNft is ERC721, ERC721Enumerable, ERC721URIStorage {
         override(ERC721, ERC721Enumerable, ERC721URIStorage)
         returns (bool)
     {
-        
+        return super.supportsInterface(interfaceId);
     }
 }
