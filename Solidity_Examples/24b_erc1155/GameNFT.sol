@@ -16,7 +16,7 @@ contract GameItems is ERC1155 {
         _mint(msg.sender, CHARIZARD, 100, "");
         _mint(msg.sender, IVYSAUR, 100, "");
         _mint(msg.sender, VENUSAUR, 100, "");
-        _mint(msg.sender, CHARMANDER, 100, "");
+    
 
     }
 
