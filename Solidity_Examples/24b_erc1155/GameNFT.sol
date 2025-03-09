@@ -20,5 +20,13 @@ contract GameItems is ERC1155 {
 
     }
 
-   
+    function uri(uint256 tokenId) override public view returns(string memory) {
+        return(
+            string(abi.encodePacked(
+                "",
+                Strings.toString(tokenId),
+                ".json"
+            ))
+        );
+    }
 }
