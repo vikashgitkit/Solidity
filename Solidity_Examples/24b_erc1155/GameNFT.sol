@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract GameItems is ERC1155 {
     uint256 public constant CHARIZARD = 0;
     uint256 public constant IVYSAUR = 1;
+    uint256 public constant VENUSAUR = 2;
   
 
     constructor() ERC1155("https://game.example/api/item/{id}.json") {
