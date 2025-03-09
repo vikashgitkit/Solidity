@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+//https://www.youtube.com/watch?v=ngxWWS3Qr3Q
+//https://www.youtube.com/watch?v=J4p1sdo3Rz4&t=2s
 // https://www.youtube.com/watch?v=19SSvs32m8I&t=601s
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
