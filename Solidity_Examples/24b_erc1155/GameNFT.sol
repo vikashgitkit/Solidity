@@ -14,7 +14,7 @@ contract GameItems is ERC1155 {
     uint256 public constant VENUSAUR = 2;
     uint256 public constant CHARMANDER = 3;
 
-    constructor() ERC1155("https://game.example/api/item/{id}.json") {
+    constructor() ERC1155("https://ipfs.io/ipfs/bafybeihjjkwdrxxjnuwevlqtqmh3iegcadc32sio4wmo7bv2gbf34qs34a/{id}.json") {
         _mint(msg.sender, CHARIZARD, 100, "");
         _mint(msg.sender, IVYSAUR, 100, "");
         _mint(msg.sender, VENUSAUR, 100, "");
@@ -25,7 +25,7 @@ contract GameItems is ERC1155 {
     function uri(uint256 tokenId) override public view returns(string memory) {
         return(
             string(abi.encodePacked(
-                "",
+                "https://ipfs.io/ipfs/bafybeihjjkwdrxxjnuwevlqtqmh3iegcadc32sio4wmo7bv2gbf34qs34a/",
                 Strings.toString(tokenId),
                 ".json"
             ))
