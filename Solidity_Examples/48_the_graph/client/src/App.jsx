@@ -19,7 +19,14 @@ function App() {
     url: queryUrl
   })
 
- 
+  useEffect(() => {
+    const getTokens = async() => {
+      const {data} = await client.query(query).toPromise();
+      console.log("Data is:", data);
+      
+    }
+    getTokens();
+  },[])
   return (
     <>
       <div>
