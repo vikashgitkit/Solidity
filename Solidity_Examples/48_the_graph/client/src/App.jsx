@@ -30,6 +30,16 @@ function App() {
   return (
     <>
       <div>
+      Fetching Info from query{
+        tokens!==null && tokens.length>0 && tokens.map((token) => {
+          return(
+            <div>
+              <div>{token.id}</div>
+              <div>{token.poolCount}</div>
+            </div>
+          )
+        })
+      }
       </div>
     </>
   )
