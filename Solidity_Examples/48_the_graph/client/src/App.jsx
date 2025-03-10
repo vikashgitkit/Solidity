@@ -15,6 +15,10 @@ function App() {
   }
 }`
 
+  const client = createClient({
+    url: queryUrl
+  })
+
  
   return (
     <>
