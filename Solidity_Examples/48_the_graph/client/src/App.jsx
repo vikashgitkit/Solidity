@@ -23,7 +23,7 @@ function App() {
     const getTokens = async() => {
       const {data} = await client.query(query).toPromise();
       console.log("Data is:", data);
-      
+      setTokens(data.factories);
     }
     getTokens();
   },[])
